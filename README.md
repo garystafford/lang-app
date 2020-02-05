@@ -1,4 +1,4 @@
-# Go Microservice: getlang-app
+# Go Microservice: lang-app
 
 Go-based microservice, part of a set of (4) microservices for the application used in the blog post, [Amazon ECR Cross-Account Access for Containerized Applications on ECS](https://wp.me/p1RD28-6vd). Please read the post for complete instructions on how to use the files in this repository.
 
