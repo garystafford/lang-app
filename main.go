@@ -8,12 +8,10 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/rylans/getlang"
 	"golang.org/x/text/language"
 	"net/http"
 	"os"
-	"strings"
-
-	"github.com/rylans/getlang"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -38,17 +36,17 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	e.Use(middleware.KeyAuthWithConfig(middleware.KeyAuthConfig{
-		Skipper: func(c echo.Context) bool {
-			if strings.HasPrefix(c.Request().RequestURI, "/health") {
-				return true
-			}
-			return false
-		},
-		Validator: func(key string, c echo.Context) (bool, error) {
-			return key == os.Getenv("AUTH_KEY"), nil
-		},
-	}))
+	//e.Use(middleware.KeyAuthWithConfig(middleware.KeyAuthConfig{
+	//	Skipper: func(c echo.Context) bool {
+	//		if strings.HasPrefix(c.Request().RequestURI, "/health") {
+	//			return true
+	//		}
+	//		return false
+	//	},
+	//	Validator: func(key string, c echo.Context) (bool, error) {
+	//		return key == os.Getenv("AUTH_KEY"), nil
+	//	},
+	//}))
 
 	// Routes
 	e.GET("/health", getHealth)
