@@ -25,7 +25,7 @@ type Info struct {
 }
 
 var (
-	serverPort = ":" + getEnv("LANG_PORT", "8083")
+	serverPort = ":" + getEnv("LANG_PORT", "8080")
 )
 
 func main() {
