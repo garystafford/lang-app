@@ -1,7 +1,8 @@
 // author: Gary A. Stafford
 // site: https://programmaticponderings.com
 // license: MIT License
-// purpose: Provides fast natural language detection for various languages
+// purpose: RESTful Go implementation of golang.org/x/text/language package
+//          Provides fast natural language detection for various languages
 //          by https://github.com/rylans/getlang
 
 package main
@@ -83,7 +84,8 @@ func getHealth(c echo.Context) error {
 	var response interface{}
 	err := json.Unmarshal([]byte(`{"status":"UP"}`), &response)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, err)
+		log.Errorf("json.Unmarshal Error: %v", err)
+		return echo.NewHTTPError(http.StatusInternalServerError, err)
 	}
 
 	return c.JSON(http.StatusOK, response)
@@ -94,7 +96,8 @@ func getLanguage(c echo.Context) error {
 	jsonMap := make(map[string]interface{})
 	err := json.NewDecoder(c.Request().Body).Decode(&jsonMap)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, err)
+		log.Errorf("json.NewDecoder Error: %v", err)
+		return echo.NewHTTPError(http.StatusInternalServerError, err)
 	} else {
 		text := jsonMap["text"]
 		langInfo := getlang.FromString(text.(string))
