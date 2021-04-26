@@ -4,6 +4,7 @@
 // purpose: RESTful Go implementation of golang.org/x/text/language package
 //          Provides fast natural language detection for various languages
 //          by https://github.com/rylans/getlang
+// modified: 2021-04-25
 
 package main
 
