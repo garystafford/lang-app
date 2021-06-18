@@ -30,7 +30,7 @@ type Info struct {
 }
 
 var (
-	logLevel   = getEnv("LOG_LEVEL", "1") // INFO
+	logLevel   = getEnv("LOG_LEVEL", "1") // DEBUG
 	serverPort = getEnv("LANG_PORT", ":8080")
 	apiKey     = getEnv("API_KEY", "ChangeMe")
 	e          = echo.New()
