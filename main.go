@@ -10,15 +10,16 @@ package main
 
 import (
 	"encoding/json"
+	"net/http"
+	"os"
+	"strconv"
+	"strings"
+
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/gommon/log"
 	"github.com/rylans/getlang"
 	"golang.org/x/text/language"
-	"net/http"
-	"os"
-	"strconv"
-	"strings"
 )
 
 // Info is the language detection result
@@ -44,14 +45,10 @@ func getEnv(key, fallback string) string {
 }
 
 func getHealth(c echo.Context) error {
-	var response interface{}
-	err := json.Unmarshal([]byte(`{"status":"UP"}`), &response)
-	if err != nil {
-		log.Errorf("json.Unmarshal Error: %v", err)
-		return echo.NewHTTPError(http.StatusInternalServerError, err)
-	}
-
-	return c.JSON(http.StatusOK, response)
+	healthStatus := struct {
+		Status string `json:"status"`
+	}{"Up"}
+	return c.JSON(http.StatusOK, healthStatus)
 }
 
 func getLanguage(c echo.Context) error {
